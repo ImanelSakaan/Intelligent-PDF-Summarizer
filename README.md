@@ -39,7 +39,7 @@ This project is a serverless PDF summarization pipeline built with **Azure Durab
 
 ---
 
-## 3. 🧰 Tech Stack
+## 3. 🧰 Tech Stack and Azure Resource Setup
 
 - Python 3.10+
 - Azure Durable Functions
@@ -47,7 +47,104 @@ This project is a serverless PDF summarization pipeline built with **Azure Durab
 - Azure Cognitive Services (OpenAI or Text Analytics)
 - PyMuPDF / Azure Form Recognizer (for PDF text extraction)
 
+### ✅ 3.1. Create a Resource Group (optional but recommended)
+
+Create a resource group named `pdf-summary-rg` in the `canadacentral` region:
+
+```bash
+az group create --name pdf-summary-rg --location canadacentral
+```
+### ✅ 3.2. Create a Storage Account
+
+Create a storage account named `pdfsummarystorage` in the `canadacentral` region:
+
+```bash
+aaz storage account create --name pdfsummarystorage --location canadacentral --resource-group pdf-summary-rg --sku Standard_LRS
+
+```
+### ✅ Make Note of the Storage Account Name and Connection String
+
+Run the following command to retrieve the connection string:
+
+```bash
+az storage account show-connection-string --name pdfsummarystorage --resource-group pdf-summary-rg
+
+```
+### ✅ 3.3. Create a Blob Container for PDFs
+
+Create a private blob container named `pdf-uploads` in your storage account:
+
+```bash
+aaz storage container create --name pdf-uploads --account-name pdfsummarystorage --public-access off
+```
+
+### ✅ 3.4. Create an Azure Function App (Python & Durable Enabled)
+
+Create a Function App named `pdfsummarizerfunc` using the Python runtime and Durable Functions support:
+
+```bash
+az functionapp create --resource-group pdf-summary-rg --consumption-plan-location canadacentral --runtime python --functions-version 4 --name pdfsummarizerfunc --storage-account pdfsummarystorage --os-type Linux
+```
+### ✅ 3.5. Create and Configure Azure Form Recognizer
+
+1. Go to the [Azure Portal](https://portal.azure.com)
+2. Click **"Create a resource"** → Search for **Form Recognizer**
+3. Select **Form Recognizer** and create it in the `pdf-summary-rg` resource group
+4. Choose a name like `pdfsummarizerform`
+5. Choose a pricing tier  
+   > 💡 **Free F0** is available and works well for testing
+
 ---
+
+Once created, copy the following values for use in your application:
+
+### 📌 Form Recognizer Configuration Values
+
+- **FORM_RECOGNIZER_ENDPOINT**  
+https://pdfsummarizerform.cognitiveservices.azure.com/
+
+- **FORM_RECOGNIZER_KEY**  
+FVpFmGmuxsrJWCotEbH298XKhA11ovzoL0QX1G3UbNsAtpqlb7U6JQQJ99BFACBsN54XJ3w3AAALACOGysSl
+---
+### ✅ 3.6. Set Up Azure OpenAI (or Cognitive Services for Summarization)
+
+1. Go to the [Azure Portal](https://portal.azure.com)
+2. Search for **Azure OpenAI** and create a resource  
+   - Suggested name: `pdfCogOpenAI`
+3. Once created, go to the resource and **deploy a model**  
+   - Recommended: `gpt-35-turbo` or `gpt-4`
+
+---
+
+Once the model is deployed, copy the following values:
+
+- **OPENAI_API_KEY**  
+
+- **OPENAI_ENDPOINT**  
+https://pdfcogopenai.openai.azure.com/
+
+
+- **OPENAI_DEPLOYMENT_NAME**  
+gpt-35-turbo
+
+### ✅ 3.7. Set Local Environment Variables
+
+Create a file named `local.settings.json` in the root of your Azure Function project with the following content:
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "<your-storage-connection-string>",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "FORM_RECOGNIZER_ENDPOINT": "<your-form-recognizer-endpoint>",
+    "FORM_RECOGNIZER_KEY": "<your-form-recognizer-key>",
+    "OPENAI_API_KEY": "<your-openai-key>",
+    "OPENAI_DEPLOYMENT_NAME": "<your-deployment-name>",
+    "OPENAI_ENDPOINT": "<your-openai-endpoint>"
+  }
+}
+```
 
 ## 4. 🛠️ How to Deploy and Run the App
 
