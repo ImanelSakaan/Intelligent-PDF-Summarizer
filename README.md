@@ -25,7 +25,7 @@ This project is a serverless PDF summarization pipeline built with **Azure Durab
 ## 1. 📸 Demo Video
 
 🎥 Watch the 10-minute demo here:  
-**[▶️ YouTube Video Link](https://www.youtube.com/watch?v=YOUR_VIDEO_LINK_HERE)**
+**[▶️ YouTube Video Link](https://youtu.be/e5V9-HNniXs)**
 
 ---
 ## 2. 🚀 Features
