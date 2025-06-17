@@ -35,6 +35,7 @@ This project is a serverless PDF summarization pipeline built with **Azure Durab
 - Uses Azure AI (Text Analytics or OpenAI) to summarize page content
 - Aggregates all summaries into one final result
 - Monitors orchestration via Durable Functions status endpoint
+<img width="556" alt="Screenshot 2025-06-17 in-out" src="https://github.com/user-attachments/assets/ebf399a4-4d8e-412f-8dfc-bb413b7f9308" />
 
 ---
 
@@ -108,7 +109,7 @@ You can use tools like **Postman** or **curl** to test the PDF upload:
 ```bash
 curl -X POST http://localhost:7071/api/orchestrators/OrchestratorFunction \
   -F "file=@your-pdf-file.pdf"
-
+```
 
 A response will be returned with several status URLs to monitor the Durable Function instance:
 
@@ -116,6 +117,16 @@ A response will be returned with several status URLs to monitor the Durable Func
 * `terminatePostUri`: Manually terminate the orchestration
 * `sendEventPostUri`: Send custom events to the orchestration (if used)
 
+
+![image](https://github.com/user-attachments/assets/cd251338-94a0-408e-beb7-002911dec596)
+
+<img width="517" alt="Screenshot 2025-06-17 Azure1" src="https://github.com/user-attachments/assets/cc8128c1-2a01-47cf-9a9c-718a99736dad" />
+<img width="1274" alt="Screenshot 2025-06-17 Azure2" src="https://github.com/user-attachments/assets/e7d82cce-0407-412a-ae1a-35a80d4b8319" />
+<img width="1145" alt="Screenshot 2025-06-17 Azure3" src="https://github.com/user-attachments/assets/3acac981-1326-4a0c-86e2-bc066be6660e" />
+<img width="772" alt="Screenshot 2025-06-17 Azure7" src="https://github.com/user-attachments/assets/763a7389-d1fb-455d-8fdd-c96547e0d0ae" />
+<img width="1050" alt="Screenshot 2025-06-17 Azure8" src="https://github.com/user-attachments/assets/41ff8e2e-f1b1-4b13-aef5-bead68e0fad9" />
+Thanks a lot
+Iman Elsakaan
 
 
 
