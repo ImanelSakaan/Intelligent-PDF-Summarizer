@@ -13,14 +13,125 @@ languages:
 ---
 -->
 
-# Intelligent PDF Summarizer
-The purpose of this sample application is to demonstrate how Durable Functions can be leveraged to create intelligent applications, particularly in a document processing scenario. Order and durability are key here because the results from one activity are passed to the next. Also, calls to services like Cognitive Service or Azure Open AI can be costly and should not be repeated in the event of failures.
+# 🧠 Intelligent PDF Summarizer using Azure Durable Functions
 
-This sample integrates various Azure services, including Azure Durable Functions, Azure Storage, Azure Cognitive Services, and Azure Open AI.
-
-The application showcases how PDFs can be ingested and intelligently scanned to determine their content.
-
+This project is a serverless PDF summarization pipeline built with **Azure Durable Functions** and **Azure Cognitive Services**. It takes a PDF document as input, extracts text from each page, summarizes the content using AI, and returns a final summary to the user.
 ![Architecture Diagram](./media/architecture_v2.png)
+
+> 📌 Built as part of Lab 2 for the Full-Stack Cloud Developer program.
+
+---
+
+## 1. 📸 Demo Video
+
+🎥 Watch the 10-minute demo here:  
+**[▶️ YouTube Video Link](https://www.youtube.com/watch?v=YOUR_VIDEO_LINK_HERE)**
+
+---
+## 2. 🚀 Features
+
+- Upload a PDF via HTTP
+- Extracts and processes each page using Durable Functions (fan-out/fan-in pattern)
+- Uses Azure AI (Text Analytics or OpenAI) to summarize page content
+- Aggregates all summaries into one final result
+- Monitors orchestration via Durable Functions status endpoint
+
+---
+
+## 3. 🧰 Tech Stack
+
+- Python 3.10+
+- Azure Durable Functions
+- Azure Blob Storage
+- Azure Cognitive Services (OpenAI or Text Analytics)
+- PyMuPDF / Azure Form Recognizer (for PDF text extraction)
+
+---
+
+## 4. 🛠️ How to Deploy and Run the App
+
+### 4.1. Clone the Repository
+
+git clone https://github.com/YOUR_USERNAME/intelligent-pdf-summarizer.git
+cd intelligent-pdf-summarizer
+
+### 4.2. Set Up Python Virtual Environment
+
+```bash
+python -m venv .venv
+source .venv/bin/activate    # For macOS/Linux
+.venv\Scripts\activate       # For Windows
+pip install -r requirements.txt
+
+```
+
+### 4.3. Configure `local.settings.json`
+
+Create a file named `local.settings.json` in the project root directory with the following content:
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "<your-azure-storage-connection-string>",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "OPENAI_API_KEY": "<your-openai-key>",
+    "OPENAI_ENDPOINT": "<your-openai-endpoint>",
+    "FORM_RECOGNIZER_KEY": "<optional-form-recognizer-key>",
+    "FORM_RECOGNIZER_ENDPOINT": "<optional-form-recognizer-endpoint>"
+  }
+}
+
+```
+### 4.4. Run the Application Locally
+
+Start the Azure Functions runtime:
+
+```bash
+func start
+````
+
+This will launch your Azure Function app locally at:
+
+```
+http://localhost:7071
+```
+
+The endpoint to trigger the PDF summarization process:
+
+```bash
+POST http://localhost:7071/api/orchestrators/OrchestratorFunction
+```
+
+You can use tools like **Postman** or **curl** to test the PDF upload:
+
+```bash
+curl -X POST http://localhost:7071/api/orchestrators/OrchestratorFunction \
+  -F "file=@your-pdf-file.pdf"
+
+
+A response will be returned with several status URLs to monitor the Durable Function instance:
+
+* `statusQueryGetUri`: Get the current progress/status
+* `terminatePostUri`: Manually terminate the orchestration
+* `sendEventPostUri`: Send custom events to the orchestration (if used)
+
+
+
+
+
+``
+
+
+
+
+
+
+
+
+
+
+
 
 The application's workflow is as follows:
 1.	PDFs are uploaded to a blob storage input container.
