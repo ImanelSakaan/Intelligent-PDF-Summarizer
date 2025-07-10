@@ -47,6 +47,21 @@ This project is a serverless PDF summarization pipeline built with **Azure Durab
 - Azure Cognitive Services (OpenAI or Text Analytics)
 - PyMuPDF / Azure Form Recognizer (for PDF text extraction)
 
+### Clone the Repository
+
+git clone https://github.com/YOUR_USERNAME/intelligent-pdf-summarizer.git
+cd intelligent-pdf-summarizer
+
+### Set Up Python Virtual Environment
+
+```bash
+python -m venv .venv
+source .venv/bin/activate    # For macOS/Linux
+.venv\Scripts\activate       # For Windows
+pip install -r requirements.txt
+
+```
+
 ### ✅ 3.1. Create a Resource Group (optional but recommended)
 
 Create a resource group named `pdf-summary-rg` in the `canadacentral` region:
@@ -148,40 +163,7 @@ Create a file named `local.settings.json` in the root of your Azure Function pro
 
 ## 4. 🛠️ How to Deploy and Run the App
 
-### 4.1. Clone the Repository
-
-git clone https://github.com/YOUR_USERNAME/intelligent-pdf-summarizer.git
-cd intelligent-pdf-summarizer
-
-### 4.2. Set Up Python Virtual Environment
-
-```bash
-python -m venv .venv
-source .venv/bin/activate    # For macOS/Linux
-.venv\Scripts\activate       # For Windows
-pip install -r requirements.txt
-
-```
-
-### 4.3. Configure `local.settings.json`
-
-Create a file named `local.settings.json` in the project root directory with the following content:
-
-```json
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "<your-azure-storage-connection-string>",
-    "FUNCTIONS_WORKER_RUNTIME": "python",
-    "OPENAI_API_KEY": "<your-openai-key>",
-    "OPENAI_ENDPOINT": "<your-openai-endpoint>",
-    "FORM_RECOGNIZER_KEY": "<optional-form-recognizer-key>",
-    "FORM_RECOGNIZER_ENDPOINT": "<optional-form-recognizer-endpoint>"
-  }
-}
-
-```
-### 4.4. Run the Application Locally
+### 4.1. Run the Application Locally
 
 Start the Azure Functions runtime:
 
