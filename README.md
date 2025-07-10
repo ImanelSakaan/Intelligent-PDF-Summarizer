@@ -49,8 +49,8 @@ This project is a serverless PDF summarization pipeline built with **Azure Durab
 
 ### Clone the Repository
 
-git clone https://github.com/YOUR_USERNAME/intelligent-pdf-summarizer.git
-cd intelligent-pdf-summarizer
+- git clone https://github.com/YOUR_USERNAME/intelligent-pdf-summarizer.git
+- cd intelligent-pdf-summarizer
 
 ### Set Up Python Virtual Environment
 
