@@ -140,6 +140,8 @@ Once the model is deployed, copy the following values:
 
 - **OPENAI_DEPLOYMENT_NAME**  
    gpt-35-turbo-instruct
+  
+<img width="1109" height="641" alt="image" src="https://github.com/user-attachments/assets/a67c10ff-3d7e-40b5-b9fb-9d1e6559299b" />
 
 ### ✅ 3.7. Set Local Environment Variables
 
@@ -178,6 +180,8 @@ This will launch your Azure Function app locally at:
 ```
 http://localhost:7071
 ```
+<img width="817" height="609" alt="image" src="https://github.com/user-attachments/assets/3a45413e-5f66-4254-a0d7-be8f13cf647a" />
+
 
 The endpoint to trigger the PDF summarization process:
 
