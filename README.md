@@ -48,9 +48,10 @@ This project is a serverless PDF summarization pipeline built with **Azure Durab
 - PyMuPDF / Azure Form Recognizer (for PDF text extraction)
 
 ### Clone the Repository
-
-- git clone https://github.com/YOUR_USERNAME/intelligent-pdf-summarizer.git
-- cd intelligent-pdf-summarizer
+```bash
+git clone https://github.com/YOUR_USERNAME/intelligent-pdf-summarizer.git
+cd intelligent-pdf-summarizer
+```
 
 ### Set Up Python Virtual Environment
 
@@ -116,31 +117,29 @@ Once created, copy the following values for use in your application:
 ### 📌 Form Recognizer Configuration Values
 
 - **FORM_RECOGNIZER_ENDPOINT**  
-https://pdfsummarizerform.cognitiveservices.azure.com/
+   https://pdfsummarizerform.cognitiveservices.azure.com/
 
 - **FORM_RECOGNIZER_KEY**  
-FVpFmGmuxsrJWCotEbH298XKhA11ovzoL0QX1G3UbNsAtpqlb7U6JQQJ99BFACBsN54XJ3w3AAALACOGysSl
+   FBZ8uMGMZGeJl7vLW4e56OBEQdwnJJfO3kOcybTd6m8mJHyj06ouJQQJ99BGACBsN54XJ3w3AAALACOGVV7C
 ---
 ### ✅ 3.6. Set Up Azure OpenAI (or Cognitive Services for Summarization)
 
 1. Go to the [Azure Portal](https://portal.azure.com)
 2. Search for **Azure OpenAI** and create a resource  
-   - Suggested name: `pdfCogOpenAI`
+   
 3. Once created, go to the resource and **deploy a model**  
    - Recommended: `gpt-35-turbo` or `gpt-4`
-
 ---
 
 Once the model is deployed, copy the following values:
 
 - **OPENAI_API_KEY**  
-
+   1z14G32NmMC2nBCUdi6O0wuaAlczkPfdDfyx0IPldBgo9WmC1d8mJQQJ99BGACYeBjFXJ3w3AAAAACOGw45w
 - **OPENAI_ENDPOINT**  
-https://pdfcogopenai.openai.azure.com/
-
+   [https://pdfcogopenai.openai.azure.com/](https://elsa0-mcxnbjbl-eastus.cognitiveservices.azure.com/openai/deployments/gpt-35-turbo-instruct/chat/completions?api-version=2025-01-01-preview)
 
 - **OPENAI_DEPLOYMENT_NAME**  
-gpt-35-turbo
+   gpt-35-turbo-instruct
 
 ### ✅ 3.7. Set Local Environment Variables
 
@@ -148,15 +147,18 @@ Create a file named `local.settings.json` in the root of your Azure Function pro
 
 ```json
 {
+  {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "<your-storage-connection-string>",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=pdfsummarystorage;AccountKey=+9V4tJMZPDcNqHWIOYIN2ehXYdK8BEr9FQGajTrtqYXpJ15a6BJI/zwtI+9BixvMd7V/DNL2aFNF+AStU7Mzrw==;EndpointSuffix=core.windows.net",
     "FUNCTIONS_WORKER_RUNTIME": "python",
-    "FORM_RECOGNIZER_ENDPOINT": "<your-form-recognizer-endpoint>",
-    "FORM_RECOGNIZER_KEY": "<your-form-recognizer-key>",
-    "OPENAI_API_KEY": "<your-openai-key>",
-    "OPENAI_DEPLOYMENT_NAME": "<your-deployment-name>",
-    "OPENAI_ENDPOINT": "<your-openai-endpoint>"
+    "FORM_RECOGNIZER_ENDPOINT": "https://pdfsummarizerform.cognitiveservices.azure.com/",
+    "FORM_RECOGNIZER_KEY": "FBZ8uMGMZGeJl7vLW4e56OBEQdwnJJfO3kOcybTd6m8mJHyj06ouJQQJ99BGACBsN54XJ3w3AAALACOGVV7C",
+    "OPENAI_API_KEY": "1z14G32NmMC2nBCUdi6O0wuaAlczkPfdDfyx0IPldBgo9WmC1d8mJQQJ99BGACYeBjFXJ3w3AAAAACOGw45w",
+    "OPENAI_DEPLOYMENT_NAME": "gpt-35-turbo-instruct",
+    "OPENAI_ENDPOINT": "https://elsa0-mcxnbjbl-eastus.cognitiveservices.azure.com/openai/deployments/gpt-35-turbo-instruct/chat/completions?api-version=2025-01-01-preview"
+  }
+}
   }
 }
 ```
