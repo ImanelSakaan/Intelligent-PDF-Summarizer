@@ -166,8 +166,11 @@ Create a file named `local.settings.json` in the root of your Azure Function pro
 ```
 
 ## 4. 🛠️ How to Deploy and Run the App
+### 4.1. Drop a PDF file into the input container (use Storage Explorer or code).
 
-### 4.1. Run the Application Locally
+<img width="1255" height="336" alt="image" src="https://github.com/user-attachments/assets/c9b8671a-a1ad-485b-a183-5eaa9ed86cb4" />
+
+### 4.2. Run the Application Locally
 
 Start the Azure Functions runtime:
 
