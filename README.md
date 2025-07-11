@@ -177,6 +177,7 @@ Start the Azure Functions runtime:
 ```bash
 func start
 ````
+<img width="934" height="350" alt="image" src="https://github.com/user-attachments/assets/b1abbea4-1a39-4147-8487-1098d11ad12c" />
 
 This will launch your Azure Function app locally at:
 
