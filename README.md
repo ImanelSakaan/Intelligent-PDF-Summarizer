@@ -179,6 +179,8 @@ func start
 ````
 <img width="934" height="350" alt="image" src="https://github.com/user-attachments/assets/b1abbea4-1a39-4147-8487-1098d11ad12c" />
 
+<img width="929" height="38" alt="image" src="https://github.com/user-attachments/assets/8b613bb2-06b2-4b7f-909b-16c0524d31d0" />
+
 This will launch your Azure Function app locally at:
 
 ```
